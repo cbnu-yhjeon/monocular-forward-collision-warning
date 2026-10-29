@@ -1,0 +1,8 @@
+*:Zone.Identifier
+__pycache__/
+*.pyc
+.vscode/
+.venv/
+
+# KITTI 등 외부 데이터셋은 용량 문제로 제외 (README의 데이터셋 안내 참고)
+Midterm_exam/dataset/

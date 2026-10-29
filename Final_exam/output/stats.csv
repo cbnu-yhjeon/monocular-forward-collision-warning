@@ -1,0 +1,4 @@
+frame,filename,vis_score,vis_label,n_objects,n_danger,n_caution,n_safe,nearest_m,min_ttc_s,danger_scores,obj_classes
+1,people.jpg,0.955,Good,3,0,1,2,12.10,,,vehicle;vehicle;vehicle
+2,face.jpeg,0.615,Good,10,10,0,0,2.51,,0.84;0.75;0.71;0.68;0.73;0.92;0.84;0.65;0.64;0.79,vehicle;vehicle;vehicle;vehicle;vehicle;vehicle;vehicle;vehicle;vehicle;vehicle
+3,Lena.png,0.858,Good,4,3,1,0,2.97,,0.62;0.62;0.60,vehicle;pedestrian;vehicle;vehicle
