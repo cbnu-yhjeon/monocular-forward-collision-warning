@@ -146,7 +146,7 @@ Midterm에는 차선 검출이 전혀 없었습니다. Final에서 신규 추가
 | 강의 내용 | 적용 위치 | 코드 |
 |----------|----------|------|
 | **Canny Edge Detection** | 객체 윤곽 추출 | `cv2.Canny(blurred, 50, 150)` |
-| Morphological 연산 (Close + Dilate) | 엣지 연결 보강 | `cv2.morphologyEx(MORPH_CLOSE)` + `cv2.dilate` |
+| Morphological 연산 (Close + Dilate) — Lec 4 | 엣지 연결 보강 | `cv2.morphologyEx(MORPH_CLOSE)` + `cv2.dilate` |
 | 컨투어 추출 | 바운딩박스 생성 | `cv2.findContours(RETR_EXTERNAL, CHAIN_APPROX_SIMPLE)` |
 | **Hough Transform** (`HoughLinesP`) | 차선 검출 | `cv2.HoughLinesP(ρ=1, θ=π/180, threshold=50)` |
 | `cv2.fitLine` | 복수 선분 → 대표 직선 | `cv2.fitLine(pts, cv2.DIST_L2, 0, 0.01, 0.01)` |
@@ -182,13 +182,11 @@ Otsu 이진화 → Dilate(3회) → sure_bg
 
 Harris Corner 응답 공식: `R = det(A) - k·trace²(A)`, k = 0.04
 
-### Lec 8 — 머신러닝 기법 → `classifier.py`, `detection.py`
+### Lec 8 — 특징 매칭 & RANSAC → `detection.py`
 
 | 강의 내용 | 적용 위치 | 코드 |
 |----------|----------|------|
-| **SVM 기반 분류** | HOG+SVM 보행자 검출 | `HOGDescriptor_getDefaultPeopleDetector()` |
 | **RANSAC 개념** (통계적 이상치 제거) | 허위 바운딩박스 제거 | 중앙값 대비 5%~2000% 범위 외 제거 |
-| NMS (Non-Maximum Suppression) | 보행자 검출 후 처리 | 그리디 IoU NMS, overlap_thresh=0.4 |
 
 ### Lec 9 — 광학 흐름 → `tracking.py`
 
@@ -223,6 +221,7 @@ AᵀA · [u,v]ᵀ = -Aᵀb   (최소제곱 풀이)
 | HoG 디스크립터 계산 | 64×64 ROI → 평균 크기 | `hog.compute(resized)` → `mean(abs(desc))` |
 | **HOG + Pre-trained SVM** | 보행자 검출 | `HOGDescriptor_getDefaultPeopleDetector()` |
 | `detectMultiScale` | 다중 스케일 검출 | `winStride=(8,8), scale=1.05, finalThreshold=2.0` |
+| NMS (Non-Maximum Suppression) | 보행자 검출 후 중복 박스 제거 | 그리디 IoU NMS, overlap_thresh=0.4 |
 
 HoG 파라미터:
 ```

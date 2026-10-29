@@ -193,7 +193,7 @@ python3 process_video.py --input ../../Data/open_dataset/driving_2CIxM7x-Clc.mp4
 
 ```bash
 cd Final_exam/src
-python3 main.py --data ../../Data                      # Data/ 안의 이미지 전체
+python3 main.py --data ../../Data                      # Data/ 안의 이미지 전체 (people.jpg)
 python3 main.py --data ../../Data/people.jpg --debug   # 4분할 디버그 패널
 python3 main.py --data ../../Data --save --video --csv # PNG + MP4 + CSV 저장
 ```
@@ -232,7 +232,7 @@ monocular-forward-collision-warning/
 │       ├── result_*.png, debug_*.png, stats.csv   이미지 모드 결과
 │       └── open_dataset/      주행 영상 결과 (mp4, csv, 대표 장면)
 └── Data/
-    ├── 0.jpg, 1.jpg, people.jpg   이미지 모드 테스트 입력
+    ├── people.jpg                 이미지 모드 동작 확인용 샘플
     ├── pinhole_calib/             카메라 내부 파라미터 (camera_mat.npy, dist_coefs.npy)
     └── open_dataset/              공개 대시캠 주행 영상과 샘플 프레임
 ```
@@ -243,14 +243,15 @@ monocular-forward-collision-warning/
 
 | 강의 | 기법 | 사용 모듈 |
 |------|------|----------|
-| Lec 3 영상처리 기초 | 색공간 변환, 히스토그램 평탄화, CLAHE, Gaussian | `preprocessing.py` |
-| Lec 5 경계 검출 | Canny, Morphology, Contour, Hough Transform, Otsu, Connected Component | `detection.py`, `lane.py` |
+| Lec 3 컬러 · 히스토그램 · 필터 | 색공간 변환, 히스토그램 평탄화, CLAHE, Gaussian | `preprocessing.py` |
+| Lec 4 주파수 · 이진화 · 모폴로지 | Otsu 이진화, Morphology (Close / Dilate) | `detection.py` |
+| Lec 5 경계 검출 | Canny, Contour, Connected Component, Hough Transform | `preprocessing.py`, `detection.py`, `lane.py` |
 | Lec 6 세그멘테이션 | Watershed, Distance Transform | `detection.py` |
-| Lec 7 특징점 | Harris Corner, SIFT | `feature.py`, `risk.py` |
-| Lec 8 머신러닝 | SVM, NMS, 이상치 제거 | `classifier.py`, `detection.py` |
-| Lec 9 광학 흐름 | Good Features to Track, Pyramidal Lucas-Kanade | `tracking.py` |
+| Lec 7 코너 · SIFT | Harris Corner, SIFT, Good Features to Track | `feature.py`, `risk.py`, `tracking.py` |
+| Lec 8 특징 매칭 · RANSAC | 이상치 제거 (RANSAC 아이디어) | `detection.py` |
+| Lec 9 광학 흐름 | Pyramidal Lucas-Kanade | `tracking.py` |
 | Lec 10 카메라 기하 | 핀홀 카메라 모델, 캘리브레이션 파라미터, 왜곡 보정 | `calibration.py` |
-| Lec 12 객체 검출 | HoG 디스크립터, HOG+SVM 보행자 검출 | `feature.py`, `classifier.py` |
+| Lec 12 객체 검출 | HoG 디스크립터, HOG+SVM 보행자 검출, NMS | `feature.py`, `classifier.py` |
 
 ---
 
@@ -262,6 +263,7 @@ monocular-forward-collision-warning/
 - **오검출이 있습니다.** 엣지 기반 검출이라 도로변 수풀이나 그림자처럼 텍스처가 강한 배경을 객체로 잡는 경우가 있습니다 (위 결과 이미지 좌측의 PED 박스 참고).
 - **TTC는 연속 추적이 될 때만 나옵니다.** 박스 면적 변화율에 의존하므로 박스 크기가 흔들리면 TTC도 흔들립니다. 단일 이미지에서는 N/A입니다.
 - **검증 데이터가 적습니다.** 정량 평가는 주간·양호 조명 영상 한 편에서 했고, 정답 라벨과 비교한 정확도는 측정하지 않았습니다.
+- Final 이미지 모드 결과(`Final_exam/output/result_*.png`)는 주행 장면이 아닌 강의 샘플 이미지(people · face · Lena)로 동작만 확인한 것입니다.
 
 **향후 과제**
 

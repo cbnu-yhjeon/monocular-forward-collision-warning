@@ -36,13 +36,13 @@
     - Grayscale 변환
     - 히스토그램 기반 시인성 점수 계산 (Lec 3)
     - 시인성 낮을 시 Histogram Equalization 적용 (Lec 3)
-    - Gaussian Blur 노이즈 제거 (Lec 4)
-    - Canny Edge Detection (Lec 6)
+    - Gaussian Blur 노이즈 제거 (Lec 3)
+    - Canny Edge Detection (Lec 5)
     │
     ▼
 [2] 객체 검출 (detection.py)
-    - Morphology + Contour 기반 검출 (Lec 5/6)
-    - 검출 실패 시 Otsu + Connected Component 보조 검출 (Lec 5/6)
+    - Morphology + Contour 기반 검출 (Lec 4/5)
+    - 검출 실패 시 Otsu + Connected Component 보조 검출 (Lec 4/5)
     - 차량/보행자 크기 필터 (하늘 영역, 노이즈 제거)
     │
     ▼
@@ -108,7 +108,7 @@
 
 ---
 
-### Lec 4 — 이미지 필터링
+### Lec 3 — 이미지 필터링
 
 **개념**
 필터(커널)는 주변 픽셀값을 가중 평균하여 새 픽셀값을 결정하는 행렬입니다.
@@ -134,7 +134,9 @@ Gaussian Blur 선적용 → 실제 객체 경계만 남도록 준비
 
 ---
 
-### Lec 6 — 엣지 검출 & 세그멘테이션
+### Lec 5 — 엣지 검출 (+ Lec 4 이진화 · 모폴로지)
+
+> Otsu 이진화와 모폴로지는 Lec 4, Canny 이론은 Lec 5에서 다룹니다 (Canny 실습은 Lec 6).
 
 **개념**
 - Canny Edge: Gaussian → Sobel 기울기 → NMS → 이중 임계값 순으로 처리해 얇고 정확한 경계선 추출
